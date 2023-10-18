@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_mysql_connector import MySQL
 from flask_bootstrap import Bootstrap
 from config import DB_USERNAME, DB_PASSWORD, DB_NAME, DB_HOST, SECRET_KEY, BOOTSTRAP_SERVE_LOCAL
@@ -20,9 +20,33 @@ def create_app(test_config=None):
     bootstrap.init_app(app)
     mysql.init_app(app)
     CSRFProtect(app)
+           
+    @app.route('/')
+    def homepage():
+        return render_template('homepage.html')
 
-    from .user import user_bp as user_blueprint
-    app.register_blueprint(user_blueprint)
-
-
-    return app
+    @app.route('/students')  
+    def students():
+        return render_template('students.html') 
+    
+    @app.route('/courses')  
+    def courses():
+        return render_template('courses.html') 
+    
+    @app.route('/colleges')  
+    def colleges():
+        return render_template('colleges.html') 
+    
+    @app.route('/studentsform')  
+    def studentsform():
+        return render_template('studentsform.html') 
+    
+    @app.route('/coursesform')  
+    def coursesform():
+        return render_template('coursesform.html') 
+    
+    @app.route('/collegesform')  
+    def collegesform():
+        return render_template('collegesform.html') 
+                    
+    return app                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            

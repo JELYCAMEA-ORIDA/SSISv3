@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0d030c; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 85vh;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            height: 85px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: white; 
+        }
+
+        .button {
+          display: inline-block;
+          width: 200px; /* Set a fixed width for buttons */
+          padding: 10px 0;
+          background-color: #871f78; 
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+          margin: 10px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          text-align: center;
+          }
+
+        .button:hover {
+            background-color: #EE82EE; 
+        }
+    </style>
+</head>
+
+<body>
+    <h1> Student Information System</h1>
+
+    <!-- Buttons for different sections -->
+    <a class="button" href="/students">Students</a>
+    <a class="button" href="courses">Courses</a>
+    <a class="button" href="colleges">Colleges</a>
+</body>
+
+<script>
+    document.title = "Student Information System"; // Change the title text
+    document.title.style.fontSize = "30px"; // Change the font size (not a standard practice)
+</script> 
+</html>
