@@ -38,9 +38,8 @@ def create_app(test_config=None):
     def collegesform():
         return render_template('collegesform.html') 
     
-    app.register_blueprint(collegesroute.colleges_bp)     
-    
-    app.register_blueprint(studentsroute.students_bp)       
-    
-    app.register_blueprint(coursesroute.courses_bp)                     
+    app.register_blueprint(collegesroute.colleges_bp)  
+    app.register_blueprint(studentsroute.students_bp) 
+    app.register_blueprint(coursesroute.courses_bp)   
+                      
     return app                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
