@@ -6,4 +6,5 @@ students_bp = Blueprint('students', __name__)
 
 @students_bp.route('/students')  
 def students():
-    return render_template('students.html') 
+    students = view_students()
+    return render_template('students.html', students=students) 

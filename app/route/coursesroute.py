@@ -6,4 +6,5 @@ courses_bp = Blueprint('courses', __name__)
 
 @courses_bp.route('/courses')  
 def courses():
-    return render_template('courses.html') 
+    courses = view_courses()
+    return render_template('courses.html', courses=courses) 
