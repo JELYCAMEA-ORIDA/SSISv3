@@ -23,3 +23,9 @@ def find_college(college_search):
     colleges = cursor.fetchall()
     cursor.close()
     return colleges
+
+def delete_college(college_code):
+    cursor = mysql.connection.cursor()
+    cursor.execute("DELETE FROM colleges WHERE collegecode = %s", (college_code,))
+    mysql.connection.commit()
+    cursor.close()
