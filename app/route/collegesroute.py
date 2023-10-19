@@ -17,3 +17,12 @@ def addcolleges():
         add_college(collegecode, collegename)
         return redirect('/collegesform/') 
     return render_template('collegesform.html')
+
+@colleges_bp.route('/colleges/', methods=['GET', 'POST'])
+def search_colleges():
+    colleges = []
+    if request.method == 'POST':
+        search_query = request.form.get('collegesearch')
+        if search_query:
+            colleges = find_college(search_query)
+    return render_template('colleges.html', colleges=colleges)

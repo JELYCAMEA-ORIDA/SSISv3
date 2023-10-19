@@ -9,12 +9,11 @@ def courses():
     courses = view_courses()
     return render_template('courses.html', courses=courses) 
 
-@courses_bp.route('/coursesform/', methods=['GET', 'POST'])
-def addcourses():
+@courses_bp.route('/courses/', methods=['GET', 'POST'])
+def search_courses():
+    courses = []
     if request.method == 'POST':
-        coursecode = request.form['coursecode']
-        coursename = request.form['coursename']
-        collegecode = request.form['collegecode']
-        add_course(coursecode, coursename, collegecode)
-        return redirect('/coursesform/')
-    return render_template('coursesform.html')
+        search_query = request.form.get('coursesearch')
+        if search_query:
+            courses = find_course(search_query)
+    return render_template('courses.html', courses=courses)

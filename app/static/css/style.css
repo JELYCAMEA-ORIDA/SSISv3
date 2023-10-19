@@ -51,7 +51,7 @@ body {
     align-items: center;
     justify-content: left;
     margin-top: 20px;
-    margin-left: 130pt;
+    margin-left: 120pt;
   }
   
   .search-bar {
@@ -60,7 +60,7 @@ body {
     border-radius: 10px;
     font-size: 14px;
     margin-right: 9px;
-    width: 9in;
+    width: 7in;
   }
   
   .add-button {
@@ -71,7 +71,7 @@ body {
     padding: 10px 20px;
     cursor: pointer;
     font-size: 14px;
-    margin-left: 18pt;
+    margin-left: 130pt;
     transition: background-color 0.3s;
   }
   

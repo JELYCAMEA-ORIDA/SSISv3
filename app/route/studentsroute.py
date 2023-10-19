@@ -9,6 +9,10 @@ def students():
     students = view_students()
     return render_template('students.html', students=students) 
 
+@students_bp.route('/studentform/')
+def addstudent():
+    return render_template("studentsform.html")
+
 @students_bp.route('/studentsform/', methods=['GET', 'POST'])
 def addstudents():
     if request.method == 'POST':
@@ -21,3 +25,12 @@ def addstudents():
         add_student(id, firstname, lastname, coursecode, yearlevel, gender)
         return redirect('/studentsform/') 
     return render_template('studentsform.html')
+
+@students_bp.route('/students/', methods=['GET', 'POST'])
+def search_students():
+    students = []
+    if request.method == 'POST':
+        search_query = request.form.get('studentsearch')
+        if search_query:
+            students = find_student(search_query)
+    return render_template('students.html', students=students)

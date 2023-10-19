@@ -15,3 +15,11 @@ def add_course(coursecode, coursename, collegecode):
     cursor.execute("INSERT INTO courses (coursecode, coursename, collegecode) VALUES (%s, %s, %s)", (coursecode, coursename, collegecode))
     mysql.connection.commit()
     cursor.close()
+    
+def find_course(course_search):
+    cursor = mysql.connection.cursor(dictionary=True)
+    search_query = "%" + course_search + "%"
+    cursor.execute("SELECT * FROM courses WHERE coursecode LIKE %s OR coursename LIKE %s OR collegecode LIKE %s", (search_query, search_query, search_query))
+    courses = cursor.fetchall()
+    cursor.close()
+    return courses
