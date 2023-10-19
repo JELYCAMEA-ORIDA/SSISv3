@@ -8,3 +8,13 @@ courses_bp = Blueprint('courses', __name__)
 def courses():
     courses = view_courses()
     return render_template('courses.html', courses=courses) 
+
+@courses_bp.route('/coursesform/', methods=['GET', 'POST'])
+def addcourses():
+    if request.method == 'POST':
+        coursecode = request.form['coursecode']
+        coursename = request.form['coursename']
+        collegecode = request.form['collegecode']
+        add_course(coursecode, coursename, collegecode)
+        return redirect('/coursesform/')
+    return render_template('coursesform.html')

@@ -7,26 +7,27 @@
 
 <div class="container">
     <h2>Student form</h2>
-    <form>
+    <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token()}}">
         <div class="form-group">
             <label for="id">ID</label>
             <input type="text" class="form-control" id="id" name="id" required>
         </div>
         <div class="form-group">
-            <label for="first_name">First Name</label>
-            <input type="text" class="form-control" id="first_name" name="first_name" required>
+            <label for="firstname">First Name</label>
+            <input type="text" class="form-control" id="firstname" name="firstname" required>
         </div>
         <div class="form-group">
-            <label for="last_name">Last Name</label>
-            <input type="text" class="form-control" id="last_name" name "last_name" required>
+            <label for="lastname">Last Name</label>
+            <input type="text" class="form-control" id="lastname" name="lastname" required>
         </div>
         <div class="form-group">
-            <label for="course">Course</label>
-            <input type="text" class="form-control" id="course" name="course" required>
+            <label for="coursecode">Course</label>
+            <input type="text" class="form-control" id="coursecode" name="coursecode" required>
         </div>
         <div class="form-group">
-            <label for="year">Year</label>
-            <input type="text" class="form-control" id="year" name="year" required>
+            <label for="yearlevel">Year</label>
+            <input type="text" class="form-control" id="yearlevel" name="yearlevel" required>
         </div>
         <div class="form-group">
             <label for="gender">Gender</label>

@@ -9,3 +9,9 @@ def view_courses():
     courses = cursor.fetchall()
     cursor.close()
     return courses
+
+def add_course(coursecode, coursename, collegecode):
+    cursor = mysql.connection.cursor()
+    cursor.execute("INSERT INTO courses (coursecode, coursename, collegecode) VALUES (%s, %s, %s)", (coursecode, coursename, collegecode))
+    mysql.connection.commit()
+    cursor.close()
