@@ -29,3 +29,17 @@ def delete_student(id):
     cursor.execute("DELETE FROM students WHERE id = %s", (id,))
     mysql.connection.commit()
     cursor.close()
+
+def update_student(id, firstname, lastname, coursecode, yearlevel, gender):
+    cursor = mysql.connection.cursor()
+    update_query = "UPDATE students SET firstname = %s, lastname = %s, coursecode = %s, yearlevel = %s, gender = %s WHERE id = %s"
+    cursor.execute(update_query, (firstname, lastname, coursecode, yearlevel, gender, id))
+    mysql.connection.commit()
+    cursor.close()
+
+def get_student_by_id(student_id):
+    cursor = mysql.connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM students WHERE id = %s", (student_id,))
+    student = cursor.fetchone()
+    cursor.close()
+    return student

@@ -33,3 +33,26 @@ def remove_college(collegecode):
         print(collegecode)
         delete_college(collegecode)
         return jsonify({'success': True})
+
+@colleges_bp.route('/updatecollege', methods=['GET', 'POST'])
+def edit_college():
+    college = None
+    message = None  # Initialize the message variable
+
+    if request.method == 'GET':
+        college_code = request.args.get('collegecode')
+        if college_code:
+            college = get_college_by_code(college_code)
+
+    elif request.method == 'POST':
+        college_code = request.form['collegecode']
+        collegename = request.form['collegename']
+
+        # Update the college information in the database
+        update_college(college_code, collegename)
+        flash('College updated successfully!', 'success')  # Flash the success message
+
+        # Redirect to the colleges list with the success message
+        return redirect(url_for('colleges.colleges', collegecode=college_code))
+
+    return render_template('Updatecollege.html', college=college)

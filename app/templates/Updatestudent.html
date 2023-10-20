@@ -6,37 +6,36 @@
 <body>
 
 <div class="container">
-    <h2>Student form</h2>
+    <h2>Edit Student</h2>
     <form method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token()}}">
         <div class="form-group">
             <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id" required>
+            <input type="text" class="form-control" id="id" name="id" value="{{ student.id }}" disabled required>
+            <input name="id" value="{{ student.id }}" hidden>            
         </div>
         <div class="form-group">
             <label for="firstname">First Name</label>
-            <input type="text" class="form-control" id="firstname" name="firstname" required>
+            <input type="text" class="form-control" id="firstname" name="firstname" value="{{ student.firstname }}" required>
         </div>
         <div class="form-group">
             <label for="lastname">Last Name</label>
-            <input type="text" class="form-control" id="lastname" name="lastname" required>
+            <input type text" class="form-control" id="lastname" name="lastname" value="{{ student.lastname }}" required>
         </div>
         <div class="form-group">
             <label for="coursecode">Course</label>
-            <input type="text" class="form-control" id="coursecode" name="coursecode" required>
+            <input type="text" class="form-control" id="coursecode" name="coursecode" value="{{ student.coursecode }}" required>
         </div>
         <div class="form-group">
             <label for="yearlevel">Year</label>
-            <input type="text" class="form-control" id="yearlevel" name="yearlevel" required>
+            <input type="text" class="form-control" id="yearlevel" name="yearlevel" value="{{ student.yearlevel }}" required>
         </div>
         <div class="form-group">
             <label for="gender">Gender</label>
-            <input type="text" class="form-control" id="gender" name="gender" required>
+            <input type="text" class="form-control" id="gender" name="gender" value="{{ student.gender }}" required>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button class="btn btn-primary" onclick="location.href = '/students';">Cancel</button>
+        <button type="submit" class="btn btn-primary">Update Student</button>
 
-    </form>
     </form>
 </div>
 

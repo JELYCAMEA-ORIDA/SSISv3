@@ -6,20 +6,21 @@
 <body>
 
 <div class="container">
-    <h2>Course Information</h2>
+    <h2>Edit Course</h2>
     <form method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token()}}">
         <div class="form-group">
             <label for="coursecode">Code</label>
-            <input type="text" class="form-control" id="coursecode" name="coursecode" required>
+            <input type="text" class="form-control" id="coursecode" name="coursecode" value="{{ course.coursecode }}" required>
+            <input name="id" value="{{ course.coursecode  }}" hidden>    
         </div>
         <div class="form-group">
             <label for="coursename">Name</label>
-            <input type="text" class="form-control" id="coursename" name="coursename" required>
+            <input type="text" class="form-control" id="coursename" name="coursename" value="{{ course.coursename }}" required>
         </div>
         <div class="form-group">
             <label for="collegecode">College</label>
-            <input type="text" class="form-control" id="collegecode" name="collegecode" required>
+            <input type="text" class="form-control" id="collegecode" name="collegecode" value="{{ course.collegecode }}" required>
         </div>
       <button type="submit" class="btn btn-primary">Submit</button>
       <button class="btn btn-primary" onclick="location.href = '/courses';">Cancel</button>

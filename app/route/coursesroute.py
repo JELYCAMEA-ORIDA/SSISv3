@@ -19,7 +19,7 @@ def addcourses():
         return redirect('/coursesform/') 
     return render_template('coursesform.html')
 
-@courses_bp.route('/courses/', methods=['GET', 'POST'])
+@courses_bp.route('/updatecourses/', methods=['GET', 'POST'])
 def search_courses():
     courses = []
     if request.method == 'POST':
@@ -34,3 +34,28 @@ def remove_course(coursecode):
         print(coursecode)
         delete_course(coursecode)
         return jsonify({'success': True})
+
+@courses_bp.route('/updatecourse', methods=['GET', 'POST'])
+def edit_course():
+    course = None   
+    message = None  # Initialize the message variable
+
+    if request.method == 'GET':
+        course_code = request.args.get('coursecode')
+        if course_code:
+            course = get_course_by_code(course_code)
+
+    elif request.method == 'POST':
+        course_code = request.form['coursecode']  
+        coursename = request.form['coursename']
+        collegecode = request.form['collegecode']
+
+        # Update the course information in the database
+        update_course(course_code, coursename, collegecode)
+        flash('Course updated successfully!', 'success')  # Flash the success message
+
+        # Redirect to the courses list with the success message
+        return redirect(url_for('courses.courses', coursecode=course_code))
+
+    return render_template('Updatecourse.html', course=course)
+

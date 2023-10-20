@@ -41,3 +41,32 @@ def remove_student(id):
         print(id)
         delete_student(id)
         return jsonify({'success': True})
+
+from flask import flash, redirect, url_for
+
+@students_bp.route('/updatestudent', methods=['GET', 'POST'])
+def edit_student():
+    student = None
+    message = None  # Initialize the message variable
+
+    if request.method == 'GET':
+        student_id = request.args.get('id')
+        if student_id:
+            student = get_student_by_id(student_id)
+
+    elif request.method == 'POST':
+        student_id = request.form['id']
+        firstname = request.form['firstname']
+        lastname = request.form['lastname']
+        coursecode = request.form['coursecode']
+        yearlevel = request.form['yearlevel']
+        gender = request.form['gender']
+
+        # Update the student's information in the database
+        update_student(student_id, firstname, lastname, coursecode, yearlevel, gender)
+        flash('Student updated successfully!', 'success')  # Flash the success message
+
+        # Redirect to the students list with the success message
+        return redirect(url_for('students.students'))
+
+    return render_template('Updatestudent.html', student=student)
