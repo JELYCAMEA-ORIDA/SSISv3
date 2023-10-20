@@ -4,22 +4,23 @@ from flask_wtf import *
 
 courses_bp = Blueprint('courses', __name__)
 
-@courses_bp.route('/courses')  
+@courses_bp.route('/courses/')  
 def courses():
     courses = view_courses()
     return render_template('courses.html', courses=courses) 
 
-@courses_bp.route('/coursesform/', methods=['GET', 'POST'])
-def addcourses():
+@courses_bp.route('/courses/add', methods=['GET', 'POST'])
+def add_courses():
     if request.method == 'POST':
         coursecode = request.form['coursecode']
         coursename = request.form['coursename']
         collegecode = request.form['collegecode']  
         add_course(coursecode, coursename, collegecode)
-        return redirect('/coursesform/') 
-    return render_template('coursesform.html')
+        return redirect('/courses/')
+    colleges = get_college_codes()
+    return render_template('coursesform.html', colleges=colleges)
 
-@courses_bp.route('/updatecourses/', methods=['GET', 'POST'])
+@courses_bp.route('/courses/search', methods=['GET', 'POST'])
 def search_courses():
     courses = []
     if request.method == 'POST':
@@ -35,11 +36,10 @@ def remove_course(coursecode):
         delete_course(coursecode)
         return jsonify({'success': True})
 
-@courses_bp.route('/updatecourse', methods=['GET', 'POST'])
+@courses_bp.route('/courses/edit', methods=['GET', 'POST'])
 def edit_course():
     course = None   
-    message = None  # Initialize the message variable
-
+    
     if request.method == 'GET':
         course_code = request.args.get('coursecode')
         if course_code:
@@ -52,10 +52,8 @@ def edit_course():
 
         # Update the course information in the database
         update_course(course_code, coursename, collegecode)
-        flash('Course updated successfully!', 'success')  # Flash the success message
 
-        # Redirect to the courses list with the success message
         return redirect(url_for('courses.courses', coursecode=course_code))
-
-    return render_template('Updatecourse.html', course=course)
+    colleges = get_college_codes()
+    return render_template('Updatecourse.html', course=course, colleges=colleges)
 

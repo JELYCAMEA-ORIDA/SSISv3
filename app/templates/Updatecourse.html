@@ -20,7 +20,14 @@
         </div>
         <div class="form-group">
             <label for="collegecode">College</label>
-            <input type="text" class="form-control" id="collegecode" name="collegecode" value="{{ course.collegecode }}" required>
+            <select class="form-control" id="collegecode" name="collegecode" required>
+                <option value="{{ course.collegecode }}" selected>{{ course.collegecode }}</option>
+                {% for college in colleges %}
+                    {% if college.collegecode != course.collegecode %}
+                        <option value="{{ college.collegecode }}">{{ college.collegecode }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
         </div>
       <button type="submit" class="btn btn-primary">Submit</button>
       <button class="btn btn-primary" onclick="location.href = '/courses';">Cancel</button>

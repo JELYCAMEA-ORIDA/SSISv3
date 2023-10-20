@@ -4,7 +4,7 @@ from flask_wtf import *
 
 colleges_bp = Blueprint('colleges', __name__)
 
-@colleges_bp.route('/colleges')  
+@colleges_bp.route('/colleges/')  
 def colleges():
     colleges = view_colleges()
     return render_template('colleges.html', colleges=colleges) 
@@ -15,10 +15,10 @@ def addcolleges():
         collegecode = request.form['collegecode']
         collegename = request.form['collegename']
         add_college(collegecode, collegename) 
-        return redirect('/collegesform/')
+        return redirect('/colleges/')
     return render_template('collegesform.html')
 
-@colleges_bp.route('/colleges/', methods=['GET', 'POST'])
+@colleges_bp.route('/colleges/search', methods=['GET', 'POST'])
 def search_colleges():
     colleges = []
     if request.method == 'POST':

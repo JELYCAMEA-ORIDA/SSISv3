@@ -44,6 +44,14 @@ def get_course_by_code(course_code):
     cursor.close()
     return course
 
+def get_college_codes():
+    cursor = mysql.connection.cursor(dictionary=True)
+    query = "SELECT collegecode FROM colleges"
+    cursor.execute(query)
+    result = cursor.fetchall()
+    cursor.close()
+    return result
+
 
     
 
