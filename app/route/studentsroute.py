@@ -4,17 +4,13 @@ from flask_wtf import *
 
 students_bp = Blueprint('students', __name__)
 
-@students_bp.route('/students')  
+@students_bp.route('/students/')  
 def students():
     students = view_students()
     return render_template('students.html', students=students) 
 
-@students_bp.route('/studentform/')
-def addstudent():
-    return render_template("studentsform.html")
-
-@students_bp.route('/studentsform/', methods=['GET', 'POST'])
-def addstudents():
+@students_bp.route('/students/add', methods=['GET', 'POST'])
+def add_students():
     if request.method == 'POST':
         id = request.form['id']
         firstname = request.form['firstname']
@@ -23,10 +19,11 @@ def addstudents():
         yearlevel = request.form['yearlevel']
         gender = request.form['gender']  
         add_student(id, firstname, lastname, coursecode, yearlevel, gender)
-        return redirect('/studentsform/') 
-    return render_template('studentsform.html')
+        return redirect('/students/')
+    courses = get_course() 
+    return render_template('studentsform.html', courses=courses)
 
-@students_bp.route('/students/', methods=['GET', 'POST'])
+@students_bp.route('/students/search', methods=['GET', 'POST'])
 def search_students():
     students = []
     if request.method == 'POST':
@@ -40,17 +37,17 @@ def remove_student(id):
     if request.method == 'DELETE':
         print(id)
         delete_student(id)
+        flash('Student deleted successfully!', 'success')
         return jsonify({'success': True})
 
 from flask import flash, redirect, url_for
 
-@students_bp.route('/updatestudent', methods=['GET', 'POST'])
+@students_bp.route('/student/edit', methods=['GET', 'POST'])
 def edit_student():
     student = None
-    message = None  # Initialize the message variable
 
     if request.method == 'GET':
-        student_id = request.args.get('id')
+        student_id = request.args.get('student_id')
         if student_id:
             student = get_student_by_id(student_id)
 
@@ -64,9 +61,7 @@ def edit_student():
 
         # Update the student's information in the database
         update_student(student_id, firstname, lastname, coursecode, yearlevel, gender)
-        flash('Student updated successfully!', 'success')  # Flash the success message
 
-        # Redirect to the students list with the success message
         return redirect(url_for('students.students'))
-
-    return render_template('Updatestudent.html', student=student)
+    courses = get_course()
+    return render_template('Updatestudent.html', student=student, courses=courses)

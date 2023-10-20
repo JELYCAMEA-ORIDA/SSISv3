@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block container1 %}
-
+<div>
   <div class="text-center student">STUDENTS</div>
-  <form method="POST">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-  <div class="search-bar-container">
-    <input class="search-bar" type="text" name="studentsearch" placeholder="Search">
-    <button class="search-button" type="submit" style="background-color: #871f78; color: #fff; border: none; padding: 10px 20px; cursor: pointer; border-radius: 10px;">Search</button>
-    <a class="add-button" href="/studentsform">Add Student</a>
-  </div>
-  </form>
-
+    <form method="POST" action="/students/search">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="search-bar-container">
+      <input class="search-bar" type="text" name="studentsearch" placeholder="Search">
+        <button class="search-button" type="submit" style="background-color: #871f78; color: #fff; border: none; padding: 10px 20px; cursor: pointer; border-radius: 10px;">Search</button>
+        <a class="add-button" href="/students/add">Add Student</a>
+      </div>
+    </form>
+</div>
   <div class="table-container">
     <table class="table table-bordered table-striped text-center">
       <thead>
@@ -22,7 +22,6 @@
           <th>Year</th>
           <th>Gender</th>
           <th class="text-center">Actions</th>
-
         </tr>
       </thead>
       <tbody>
@@ -35,7 +34,7 @@
           <td>{{student.yearlevel}}</td>
           <td>{{student.gender}}</td>
           <td class="text-center">
-            <a class="btn btn-info btn-sm" href="{{ url_for('students.edit_student', id=student.id) }}"><i class="fas fa-pencil-alt"></i></a>
+        <a class="btn btn-info btn-sm" href="{{ url_for('students.edit_student', student_id=student.id) }}"><i class="fas fa-pencil-alt"></i></a>
             <a href="#" class="btn btn-danger btn-sm" student-id="{{student.id}}" csrf-token="{{csrf_token()}}" onclick="deleteStudent(this)">
               <i class="fas fa-trash"></i> 
           </td>

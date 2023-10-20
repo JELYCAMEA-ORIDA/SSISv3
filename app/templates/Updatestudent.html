@@ -20,12 +20,18 @@
         </div>
         <div class="form-group">
             <label for="lastname">Last Name</label>
-            <input type text" class="form-control" id="lastname" name="lastname" value="{{ student.lastname }}" required>
+            <input type="text" class="form-control" id="lastname" name="lastname" value="{{ student.lastname }}" required>
         </div>
         <div class="form-group">
-            <label for="coursecode">Course</label>
-            <input type="text" class="form-control" id="coursecode" name="coursecode" value="{{ student.coursecode }}" required>
-        </div>
+            <label for="coursecode">Course Code</label>
+            <select class="form-control" id="coursecode" name="coursecode" required>
+                <option value="{{ student.coursecode }}" selected>{{ student.coursecode }}</option>
+                {% for course in courses %}
+                    {% if course.coursecode != student.coursecode %}
+                        <option value="{{ course.coursecode }}">{{ course.coursecode }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
         <div class="form-group">
             <label for="yearlevel">Year</label>
             <input type="text" class="form-control" id="yearlevel" name="yearlevel" value="{{ student.yearlevel }}" required>

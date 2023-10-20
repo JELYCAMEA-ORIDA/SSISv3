@@ -11,6 +11,7 @@ def view_students():
     return students
 
 def add_student(id, firstname, lastname, coursecode, yearlevel, gender):
+    print(id, firstname, lastname, coursecode, yearlevel, gender)
     cursor = mysql.connection.cursor()
     cursor.execute("INSERT INTO students (id, firstname, lastname, coursecode, yearlevel, gender) VALUES (%s, %s, %s, %s, %s, %s)", (id, firstname, lastname, coursecode, yearlevel, gender))
     mysql.connection.commit()
@@ -43,3 +44,11 @@ def get_student_by_id(student_id):
     student = cursor.fetchone()
     cursor.close()
     return student
+
+def get_course():
+    cursor = mysql.connection.cursor(dictionary=True)
+    cursor.execute("SELECT coursecode FROM courses")
+    result = cursor.fetchall()
+    print(result)
+    cursor.close()
+    return result
