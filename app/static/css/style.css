@@ -79,16 +79,32 @@ body {
     background-color: #d675d6; /* Lighter blue on hover */
   }
   
-  .table-container {
-    padding: 20px;
-  }
-  
-  .table {
-    font-size: 14px;
-    margin: 0 auto;
-    width: 80%;
-    background-color: white;
-  }
+  .search-bar-container {
+    position: relative; /* Set the position to relative for the search bar container */
+}
+
+.table-container {
+    max-height: 400px; /* Set a fixed maximum height for the table container */
+    overflow-y: auto; /* Add a vertical scrollbar when content overflows vertically */
+    position: relative; /* Set the position to relative for the table container */
+    top: 50px; /* Adjust the top position to create space for the search bar */
+    width: 80%; /* Maintain the same width as your original table */
+    margin: 0 auto; /* Center the table horizontally */
+}
+
+.table {
+    table-layout: fixed; /* Prevent the table from expanding horizontally */
+    font-size: 14px; /* Maintain the font size */
+    background-color: white; /* Maintain the background color */
+    width: 100%; /* Ensure the table takes up the full width of the container */
+}
+
+.table thead {
+    position: sticky;
+    top: 0; /* Keep the header at the top */
+    background-color: white; /* Maintain header background color */
+    z-index: 2; /* Ensure the header is on top of the scrollable area */
+}
   
   .table th,
   .table td {

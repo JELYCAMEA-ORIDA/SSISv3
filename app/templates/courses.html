@@ -2,7 +2,7 @@
 {% block container1 %}
 
   <div class="text-center student">COURSES</div>
-  <form method="POST">
+  <form method="POST" action="/courses/search">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
   <div class="search-bar-container">
     <input class="search-bar" type="text" name="coursesearch" placeholder="Search">
