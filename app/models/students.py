@@ -4,11 +4,13 @@ mysql= MySQL()
 
 def view_students():
     cursor = mysql.connection.cursor(dictionary=True)
-    query = "SELECT * FROM students"
+    query = """ SELECT students.*, CONCAT(colleges.collegename, ' (', courses.collegecode, ')') AS collegecode FROM students
+    JOIN courses ON students.coursecode = courses.coursecode JOIN colleges ON courses.collegecode = colleges.collegecode"""
     cursor.execute(query)
     students = cursor.fetchall()
     cursor.close()
     return students
+
 
 def add_student(id, firstname, lastname, coursecode, yearlevel, gender):
     print(id, firstname, lastname, coursecode, yearlevel, gender)
@@ -20,10 +22,25 @@ def add_student(id, firstname, lastname, coursecode, yearlevel, gender):
 def find_student(student_search):
     cursor = mysql.connection.cursor(dictionary=True)
     search_query = "%" + student_search + "%"
-    cursor.execute("SELECT * FROM students WHERE id LIKE %s OR firstname LIKE %s OR lastname LIKE %s OR coursecode LIKE %s OR yearlevel LIKE %s OR gender LIKE %s", (search_query, search_query, search_query, search_query, search_query, search_query))
+    query = """
+        SELECT students.*, CONCAT(colleges.collegename, ' (', courses.collegecode, ')') AS collegecode
+        FROM students
+        JOIN courses ON students.coursecode = courses.coursecode
+        JOIN colleges ON courses.collegecode = colleges.collegecode
+        WHERE students.id LIKE %s
+           OR students.firstname LIKE %s
+           OR students.lastname LIKE %s
+           OR students.coursecode LIKE %s
+           OR students.yearlevel LIKE %s
+           OR students.gender LIKE %s
+           OR colleges.collegecode LIKE %s
+    """
+    cursor.execute(query, (search_query, search_query, search_query, search_query, search_query, search_query, search_query))
     students = cursor.fetchall()
     cursor.close()
+    print("Search Results:", students)  # Add this line for debugging
     return students
+
 
 def delete_student(id):
     cursor = mysql.connection.cursor()
@@ -52,3 +69,10 @@ def get_course():
     print(result)
     cursor.close()
     return result
+
+def student_exists(student_id):
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT id FROM students WHERE id = %s", (student_id,))
+    result = cursor.fetchone()
+    cursor.close()
+    return result is not None

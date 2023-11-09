@@ -15,10 +15,17 @@ def add_courses():
         coursecode = request.form['coursecode']
         coursename = request.form['coursename']
         collegecode = request.form['collegecode']  
-        add_course(coursecode, coursename, collegecode)
+        
+        # Check if the student already exists
+        if course_exists(coursecode):
+            flash("Course with this Code already exists.", "error")
+        else:
+            # Student doesn't exist, add them to the database
+            add_course(coursecode, coursename, collegecode)
         return redirect('/courses/')
     colleges = get_college_codes()
     return render_template('coursesform.html', colleges=colleges)
+from flask import flash, redirect, url_for
 
 @courses_bp.route('/courses/search', methods=['GET', 'POST'])
 def search_courses():

@@ -18,10 +18,18 @@ def add_students():
         coursecode = request.form['coursecode']
         yearlevel = request.form['yearlevel']
         gender = request.form['gender']  
-        add_student(id, firstname, lastname, coursecode, yearlevel, gender)
+        
+        # Check if the student already exists
+        if student_exists(id):
+            flash("Student with this ID already exists.", "error")
+        else:
+            # Student doesn't exist, add them to the database
+            add_student(id, firstname, lastname, coursecode, yearlevel, gender)
+            flash("Student added successfully.", "success")
         return redirect('/students/')
     courses = get_course() 
     return render_template('studentsform.html', courses=courses)
+from flask import flash, redirect, url_for
 
 @students_bp.route('/students/search', methods=['GET', 'POST'])
 def search_students():

@@ -14,9 +14,16 @@ def addcolleges():
     if request.method == 'POST':
         collegecode = request.form['collegecode']
         collegename = request.form['collegename']
-        add_college(collegecode, collegename) 
+        
+        # Check if the student already exists
+        if college_exists(collegecode):
+            flash("College with this code already exists.", "error")
+        else:
+            add_college(collegecode, collegename) 
+            flash("College added successfully.", "success")
         return redirect('/colleges/')
     return render_template('collegesform.html')
+from flask import flash, redirect, url_for
 
 @colleges_bp.route('/colleges/search', methods=['GET', 'POST'])
 def search_colleges():
@@ -50,8 +57,7 @@ def edit_college():
 
         # Update the college information in the database
         update_college(college_code, collegename)
-        flash('College updated successfully!', 'success')  # Flash the success message
-
+        
         # Redirect to the colleges list with the success message
         return redirect(url_for('colleges.colleges', collegecode=college_code))
 

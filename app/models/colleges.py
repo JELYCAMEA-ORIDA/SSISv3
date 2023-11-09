@@ -43,3 +43,10 @@ def get_college_by_code(college_code):
     college = cursor.fetchone()
     cursor.close()
     return college
+
+def college_exists(collegecode):
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT collegecode FROM colleges WHERE collegecode = %s", (collegecode,))
+    result = cursor.fetchone()
+    cursor.close()
+    return result is not None

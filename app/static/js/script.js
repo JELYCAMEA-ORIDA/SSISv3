@@ -22,7 +22,7 @@ function deleteCollege(button) {
 function deleteCourse(button) {
     var course_code = button.getAttribute('course-code');
     var csrfToken = button.getAttribute('csrf-token');
-    if (confirm("Are you sure you want to delete this Course?\nStudents and Courses under this Course will also be deleted.")) {
+    if (confirm("Are you sure you want to delete this Course?\nStudents under this Course will also be deleted.")) {
         fetch(`/courses/delete/${course_code}`, {  // Correct the URL
             method: 'DELETE',
             headers: {

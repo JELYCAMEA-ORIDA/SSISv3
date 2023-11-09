@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+{% block container1 %}
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -32,13 +33,25 @@
         </div>
         <div class="form-group">
             <label for="yearlevel">Year</label>
-            <input type="text" class="form-control" id="yearlevel" name="yearlevel" required>
-        </div>
+            <select class="form-control" id="yearlevel" name="yearlevel" required>
+                <option value="" disabled selected>--Select Year Level--</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+        </div>        
         <div class="form-group">
-            <div class="form-group">
-                <label for="gender">Gender</label>
-                <input type="text" class="form-control" id="gender" name="gender" required>
+            <label for="gender">Gender</label>
+            <select class="form-control" id="gender" name="gender" required>
+                <option value="" disabled selected>--Select Gender--</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
         </div>
+        
         <button type="submit" class="btn btn-primary">Submit</button>
         <button class="btn btn-primary" onclick="location.href = '/students';">Cancel</button>
 
@@ -51,3 +64,5 @@
 
 </body>
 </html>
+
+{% endblock %}
