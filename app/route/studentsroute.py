@@ -1,6 +1,7 @@
 from flask import *
 from app.models.students import *
 from flask_wtf import *
+import re
 
 students_bp = Blueprint('students', __name__)
 
@@ -19,13 +20,17 @@ def add_students():
         yearlevel = request.form['yearlevel']
         gender = request.form['gender']  
         
-        # Check if the student already exists
-        if student_exists(id):
-            flash("Student with this ID already exists.", "error")
+        if not re.match(r'^\d{4}-\d{4}$', id):
+            flash('Error: Invalid Student ID format. Please follow the format YYYY-NNNN.', 'error')
         else:
-            # Student doesn't exist, add them to the database
-            add_student(id, firstname, lastname, coursecode, yearlevel, gender)
-            flash("Student added successfully.", "success")
+            # Check if the student already exists
+            if student_exists(id):
+                flash("Error: Student with this ID already exists.", "error")
+            else:
+                # Student doesn't exist, add them to the database
+                add_student(id, firstname, lastname, coursecode, yearlevel, gender)
+                flash("Success: Student added successfully.", "success")
+
         return redirect('/students/')
     courses = get_course() 
     return render_template('studentsform.html', courses=courses)
@@ -72,4 +77,4 @@ def edit_student():
 
         return redirect(url_for('students.students'))
     courses = get_course()
-    return render_template('Updatestudent.html', student=student, courses=courses)
+    return render_template('Updatestudent.html', student=student, courses=courses,)

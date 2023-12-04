@@ -76,3 +76,10 @@ def student_exists(student_id):
     result = cursor.fetchone()
     cursor.close()
     return result is not None
+
+def check_id(student_id):
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT id FROM students WHERE id = %s", (student_id,))
+    result = cursor.fetchone()
+    cursor.close()
+    return result
