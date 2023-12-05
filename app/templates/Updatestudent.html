@@ -36,12 +36,12 @@
             <div class="form-group">
                 <label for="yearlevel">Year Level</label>
                 <select class="form-control" id="yearlevel" name="yearlevel" required>
-                    <option value="1" {% if student.yearlevel == '1' %}selected{% endif %}>1</option>
-                    <option value="2" {% if student.yearlevel == '2' %}selected{% endif %}>2</option>
-                    <option value="3" {% if student.yearlevel == '3' %}selected{% endif %}>3</option>
-                    <option value="4" {% if student.yearlevel == '4' %}selected{% endif %}>4</option>
-                    <option value="5" {% if student.yearlevel == '5' %}selected{% endif %}>5</option>
-                    <option value="6" {% if student.yearlevel == '6' %}selected{% endif %}>6</option>
+                    <option value="1" {% if student.yearlevel|int == 1 %}selected{% endif %}>1</option>
+                    <option value="2" {% if student.yearlevel|int == 2 %}selected{% endif %}>2</option>
+                    <option value="3" {% if student.yearlevel|int == 3 %}selected{% endif %}>3</option>
+                    <option value="4" {% if student.yearlevel|int == 4 %}selected{% endif %}>4</option>
+                    <option value="5" {% if student.yearlevel|int == 5 %}selected{% endif %}>5</option>
+                    <option value="6" {% if student.yearlevel|int == 6 %}selected{% endif %}>6</option>
                 </select>
             </div>
             <div class="form-group">
