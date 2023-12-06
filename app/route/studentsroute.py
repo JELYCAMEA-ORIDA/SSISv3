@@ -2,6 +2,10 @@ from flask import *
 from app.models.students import *
 from flask_wtf import *
 import re
+from config import CLOUDINARY_FOLDER
+import cloudinary
+from cloudinary.uploader import upload as cloudinary_upload
+from cloudinary.utils import cloudinary_url
 
 students_bp = Blueprint('students', __name__)
 
@@ -71,10 +75,29 @@ def edit_student():
         coursecode = request.form['coursecode']
         yearlevel = request.form['yearlevel']
         gender = request.form['gender']
+        image_url = request.form['image_url']
 
         # Update the student's information in the database
-        update_student(student_id, firstname, lastname, coursecode, yearlevel, gender)
+        update_student(student_id, firstname, lastname, coursecode, yearlevel, gender, image_url)
 
         return redirect(url_for('students.students'))
     courses = get_course()
     return render_template('Updatestudent.html', student=student, courses=courses,)
+
+@students_bp.route('/upload/cloudinary/', methods=['POST'])
+def upload_to_cloudinary():
+    file = request.files.get('file')
+
+    if file:
+        upload_result = cloudinary_upload(
+            file, folder=CLOUDINARY_FOLDER)
+
+        return jsonify({
+            'is_success': True,
+            'url': upload_result['secure_url']
+        })
+
+    return jsonify({
+        'is_success': False,
+        'error': 'Missing file'
+    })

@@ -115,26 +115,69 @@ body {
   /* Custom column widths */
   .table th:nth-child(1),
   .table td:nth-child(1) {
-    width: 12%; 
+    width: 10%; 
   }
   
+  .table th:nth-child(2),
+  .table td:nth-child(2) {
+    width: 9%; 
+  }
+  .table th:nth-child(3),
+  .table td:nth-child(3) {
+    width: 12%; 
+  }
+
   .table th:nth-child(4),
   .table td:nth-child(4) {
-    width: 10%; /* Wider column for Course */
+    width: 12%; 
   }
 
   .table th:nth-child(5),
   .table td:nth-child(5) {
-    width: 30%; /* Wider column for Course */
+    width: 8%; 
   }
 
   .table th:nth-child(6),
   .table td:nth-child(6) {
-    width: 5%; /* Reduced width for Year and Gender */
+    width: 25%; 
   }
   
   .table th:nth-child(7),
   .table td:nth-child(7) {
-    width: 10%; /* Adjusted width for Actions */
+    width: 6%; 
+  }
+
+  .table th:nth-child(8),
+  .table td:nth-child(8) {
+    width: 8%; 
+  }
+
+  #student_image {
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid gray;
+    
+  }
+  
+  
+  .student_image_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  #student_info_image {
+    margin-top: 20px;
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+    border: 2px solid gray;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   

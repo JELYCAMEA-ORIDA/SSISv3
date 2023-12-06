@@ -12,10 +12,10 @@ def view_students():
     return students
 
 
-def add_student(id, firstname, lastname, coursecode, yearlevel, gender):
-    print(id, firstname, lastname, coursecode, yearlevel, gender)
+def add_student(id, firstname, lastname, coursecode, yearlevel, gender, image_url):
+    print(id, firstname, lastname, coursecode, yearlevel, gender, image_url)
     cursor = mysql.connection.cursor()
-    cursor.execute("INSERT INTO students (id, firstname, lastname, coursecode, yearlevel, gender) VALUES (%s, %s, %s, %s, %s, %s)", (id, firstname, lastname, coursecode, yearlevel, gender))
+    cursor.execute("INSERT INTO students (id, firstname, lastname, coursecode, yearlevel, gender, image_url) VALUES (%s, %s, %s, %s, %s, %s, %s)", (id, firstname, lastname, coursecode, yearlevel, gender, image_url))
     mysql.connection.commit()
     cursor.close()
     
@@ -48,10 +48,10 @@ def delete_student(id):
     mysql.connection.commit()
     cursor.close()
 
-def update_student(id, firstname, lastname, coursecode, yearlevel, gender):
+def update_student(id, firstname, lastname, coursecode, yearlevel, gender, image_url):
     cursor = mysql.connection.cursor()
-    update_query = "UPDATE students SET firstname = %s, lastname = %s, coursecode = %s, yearlevel = %s, gender = %s WHERE id = %s"
-    cursor.execute(update_query, (firstname, lastname, coursecode, yearlevel, gender, id))
+    update_query = "UPDATE students SET firstname = %s, lastname = %s, coursecode = %s, yearlevel = %s, gender = %s, image_url = %s WHERE id = %s"
+    cursor.execute(update_query, (firstname, lastname, coursecode, yearlevel, gender, image_url, id))
     mysql.connection.commit()
     cursor.close()
 
