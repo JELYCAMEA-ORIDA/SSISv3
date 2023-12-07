@@ -23,6 +23,7 @@ def add_students():
         coursecode = request.form['coursecode']
         yearlevel = request.form['yearlevel']
         gender = request.form['gender']  
+        image_url = request.form['image_url']
         
         if not re.match(r'^\d{4}-\d{4}$', id):
             flash('Error: Invalid Student ID format. Please follow the format YYYY-NNNN.', 'error')
@@ -32,7 +33,7 @@ def add_students():
                 flash("Error: Student with this ID already exists.", "error")
             else:
                 # Student doesn't exist, add them to the database
-                add_student(id, firstname, lastname, coursecode, yearlevel, gender)
+                add_student(id, firstname, lastname, coursecode, yearlevel, gender, image_url)
                 flash("Success: Student added successfully.", "success")
 
         return redirect('/students/')
@@ -79,7 +80,8 @@ def edit_student():
 
         # Update the student's information in the database
         update_student(student_id, firstname, lastname, coursecode, yearlevel, gender, image_url)
-
+        flash('Student edited successfully!', 'success')
+        
         return redirect(url_for('students.students'))
     courses = get_course()
     return render_template('Updatestudent.html', student=student, courses=courses,)
